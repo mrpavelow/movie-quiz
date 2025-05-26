@@ -1,38 +1,32 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController {
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        counterLabel.font = UIFont(name: "YSDisplay-Medium", size: 20)
-        textLabel.font = UIFont(name: "YSDisplay-Medium", size: 20)
-        questionLabel.font = UIFont(name: "YSDisplay-Bold", size: 23)
-        yesButton.titleLabel?.font = UIFont(name: "YSDisplay-Medium", size: 20)
-        noButton.titleLabel?.font = UIFont(name: "YSDisplay-Medium", size: 20)
+        counterLabel.font = Fonts.ysDisplayMedium20
+        textLabel.font = Fonts.ysDisplayMedium20
+        questionLabel.font = Fonts.ysDisplayBold23
+        yesButton.titleLabel?.font = Fonts.ysDisplayMedium20
+        noButton.titleLabel?.font = Fonts.ysDisplayMedium20
         
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderColor = UIColor.ypWhite.cgColor
         imageView.layer.cornerRadius = 6
-        
     }
     
-    @IBAction func noButtonClicked(_ sender: Any) {
+    @IBAction private func noButtonClicked(_ sender: Any) {
         let currentQuestion = questions[currentQuestionIndex]
-        let givenAnswer = false
-        
-        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        showAnswerResult(isCorrect: !currentQuestion.correctAnswer)
     }
     
-    @IBAction func yesButtonClicked(_ sender: Any) {
+    @IBAction private func yesButtonClicked(_ sender: Any) {
         let currentQuestion = questions[currentQuestionIndex]
-        let givenAnswer = true
-        
-        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        showAnswerResult(isCorrect: currentQuestion.correctAnswer)
     }
     
-    let questions: [QuizQuestion] = [
+    private let questions: [QuizQuestion] = [
         QuizQuestion(
             image: "The Godfather",
             text: "Рейтинг этого фильма больше чем 6?",
@@ -78,32 +72,40 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var questionLabel: UILabel!
-    @IBOutlet var noButton: UIButton!
-    @IBOutlet var yesButton: UIButton!
+    @IBOutlet private var noButton: UIButton!
+    @IBOutlet private var yesButton: UIButton!
     
     @IBOutlet private var counterLabel: UILabel!
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
     
-    struct ViewModel {
+    
+    private struct Fonts {
+        static let ysDisplayMediumFontName = "YSDisplay-Medium"
+        static let ysDisplayMedium20 = UIFont(name: ysDisplayMediumFontName, size: 20)
+        static let ysDisplayBoldFontName = "YSDisplay-Bold"
+        static let ysDisplayBold23 = UIFont(name: ysDisplayBoldFontName, size: 23)
+    }
+    
+    private struct ViewModel {
         let image: UIImage
         let question: String
         let questionNumber: String
     }
     
-    struct QuizStepViewModel {
+    private struct QuizStepViewModel {
         let image: UIImage
         let question: String
         let questionNumber: String
     }
     
-    struct QuizResultsViewModel {
+    private struct QuizResultsViewModel {
         let title: String
         let text: String
         let buttonText: String
     }
     
-    struct QuizQuestion {
+    private struct QuizQuestion {
         let image: String
         let text: String
         let correctAnswer: Bool
@@ -163,7 +165,7 @@ final class MovieQuizViewController: UIViewController {
     private func borderColor () {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderColor = UIColor.ypWhite.cgColor
         imageView.layer.cornerRadius = 6
     }
 
@@ -171,12 +173,16 @@ final class MovieQuizViewController: UIViewController {
         if isCorrect {
             correctAnswers += 1
         }
+        yesButton.isEnabled = false
+        noButton.isEnabled = false
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.borderColor()
             self.showNextQuestionOrResults()
+            self.yesButton.isEnabled = true
+            self.noButton.isEnabled = true
         }
 
     }

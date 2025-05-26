@@ -37,7 +37,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-e4-d9s" userLabel="Preview Image">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-e4-d9s" userLabel="Preview Image">
                                         <rect key="frame" x="0.0" y="40.5" width="374" height="561"/>
                                         <color key="backgroundColor" name="YP White"/>
                                         <constraints>
