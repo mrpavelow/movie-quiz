@@ -34,9 +34,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         noButton.titleLabel?.font = Fonts.ysDisplayMedium20
         
         imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 1
+        imageView.layer.borderWidth = 0
         imageView.layer.borderColor = UIColor.ypWhite.cgColor
-        imageView.layer.cornerRadius = 6
+        imageView.layer.cornerRadius = 20
     }
         
     @IBAction private func noButtonClicked(_ sender: Any) {
@@ -127,9 +127,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func borderColor () {
         imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 1
+        imageView.layer.borderWidth = 0
         imageView.layer.borderColor = UIColor.ypWhite.cgColor
-        imageView.layer.cornerRadius = 6
+        imageView.layer.cornerRadius = 20
     }
 
     private func showAnswerResult(isCorrect: Bool) {
