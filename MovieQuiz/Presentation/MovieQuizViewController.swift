@@ -1,32 +1,48 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
-    
-    private var alertPresenter: AlertPresenter?
-    private let statisticService: StatisticServiceProtocol = StatisticService()
-    func didReceiveNextQuestion(question: QuizQuestion?) {
-        guard let question = question else {
-            return
-        }
-
-        currentQuestion = question
-        let viewModel = convert(model: question)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.show(quiz: viewModel)
-        }
-    }
-        
-    override func viewDidLoad() {
+        override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureUI()
         
         alertPresenter = AlertPresenter(viewController: self)
         
         let questionFactory = QuestionFactory()
         questionFactory.delegate = self
         self.questionFactory = questionFactory
-
         questionFactory.requestNextQuestion()
+    }
+        
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var textLabel: UILabel!
+    @IBOutlet private var questionLabel: UILabel!
+    @IBOutlet private var noButton: UIButton!
+    @IBOutlet private var yesButton: UIButton!
+    @IBOutlet private var counterLabel: UILabel!
+    
+    private var alertPresenter: AlertPresenter?
+    
+    private let statisticService: StatisticServiceProtocol = StatisticService()
+    
+    private var currentQuestionIndex = 0
+    private let questionsAmount: Int = 10
+    private var questionFactory: QuestionFactoryProtocol?
+    private var currentQuestion: QuizQuestion?
+    private var correctAnswers = 0
+    
+    func didReceiveNextQuestion(question: QuizQuestion?) {
+        guard let question else {
+            return
+        }
+        currentQuestion = question
+        let viewModel = convert(model: question)
+        DispatchQueue.main.async { [weak self] in
+            self?.show(quiz: viewModel)
+        }
+    }
+    
+    private func configureUI() {
         counterLabel.font = Fonts.ysDisplayMedium20
         textLabel.font = Fonts.ysDisplayMedium20
         questionLabel.font = Fonts.ysDisplayBold23
@@ -38,41 +54,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         imageView.layer.borderColor = UIColor.ypWhite.cgColor
         imageView.layer.cornerRadius = 20
     }
-        
-    @IBAction private func noButtonClicked(_ sender: Any) {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
-        showAnswerResult(isCorrect: !currentQuestion.correctAnswer)
-    }
-    
-    @IBAction private func yesButtonClicked(_ sender: Any) {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
-        showAnswerResult(isCorrect: currentQuestion.correctAnswer)
-    }
-    
-    @IBOutlet private var imageView: UIImageView!
-    @IBOutlet private var textLabel: UILabel!
-    @IBOutlet private var questionLabel: UILabel!
-    @IBOutlet private var noButton: UIButton!
-    @IBOutlet private var yesButton: UIButton!
-    
-    @IBOutlet private var counterLabel: UILabel!
-    private var currentQuestionIndex = 0
-    private let questionsAmount: Int = 10
-    private var questionFactory: QuestionFactoryProtocol?
-    private var currentQuestion: QuizQuestion?
-    private var correctAnswers = 0
-    
-    private struct Fonts {
-        static let ysDisplayMediumFontName = "YSDisplay-Medium"
-        static let ysDisplayMedium20 = UIFont(name: ysDisplayMediumFontName, size: 20)
-        static let ysDisplayBoldFontName = "YSDisplay-Bold"
-        static let ysDisplayBold23 = UIFont(name: ysDisplayBoldFontName, size: 23)
-    }
-    
+
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let questionStep = QuizStepViewModel(
             image: UIImage(named: model.image) ?? UIImage(),
@@ -100,8 +82,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         )
         alertPresenter?.show(alertModel: alertModel)
     }
-    
-    
     
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
@@ -148,5 +128,19 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             self.noButton.isEnabled = true
         }
 
+    }
+    
+    @IBAction private func noButtonClicked(_ sender: Any) {
+        guard let currentQuestion = currentQuestion else {
+            return
+        }
+        showAnswerResult(isCorrect: !currentQuestion.correctAnswer)
+    }
+    
+    @IBAction private func yesButtonClicked(_ sender: Any) {
+        guard let currentQuestion = currentQuestion else {
+            return
+        }
+        showAnswerResult(isCorrect: currentQuestion.correctAnswer)
     }
 }

@@ -53,6 +53,6 @@ final class StatisticService: StatisticServiceProtocol {
     }
 
     private func isNewRecord(newGame: GameResult, bestGame: GameResult) -> Bool {
-        return newGame.correct > bestGame.correct
+        newGame.correct > bestGame.correct
     }
 }

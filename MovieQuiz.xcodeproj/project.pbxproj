@@ -28,6 +28,7 @@
 		D46906742DFA86E1000B5566 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906732DFA86E1000B5566 /* AlertPresenter.swift */; };
 		D46906822DFAE551000B5566 /* StatisticServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906812DFAE551000B5566 /* StatisticServiceProtocol.swift */; };
 		D46906842DFAE70A000B5566 /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906832DFAE70A000B5566 /* StatisticService.swift */; };
+		D46906862DFBD5FF000B5566 /* Fonts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46906852DFBD5FF000B5566 /* Fonts+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		D46906732DFA86E1000B5566 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		D46906812DFAE551000B5566 /* StatisticServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticServiceProtocol.swift; sourceTree = "<group>"; };
 		D46906832DFAE70A000B5566 /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
+		D46906852DFBD5FF000B5566 /* Fonts+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fonts+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				AD5EE5DD284D7887003966EF /* UIColor+Extensions.swift */,
 				AD7AFA542836189F00399704 /* Array+Extensions.swift */,
 				AD77F5732857F8810062FB14 /* Date+Extensions.swift */,
+				D46906852DFBD5FF000B5566 /* Fonts+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 			files = (
 				AD5EE5DE284D7887003966EF /* UIColor+Extensions.swift in Sources */,
 				D46906742DFA86E1000B5566 /* AlertPresenter.swift in Sources */,
+				D46906862DFBD5FF000B5566 /* Fonts+Extensions.swift in Sources */,
 				D46906722DFA86C9000B5566 /* AlertModel.swift in Sources */,
 				AD7AFA552836189F00399704 /* Array+Extensions.swift in Sources */,
 				D469066E2DFA690F000B5566 /* QuestionFactoryProtocol.swift in Sources */,
