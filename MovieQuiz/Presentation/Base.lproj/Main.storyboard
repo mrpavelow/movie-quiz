@@ -37,9 +37,9 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-e4-d9s" userLabel="Preview Image">
+                                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="none" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-e4-d9s" userLabel="Preview Image">
                                         <rect key="frame" x="0.0" y="40.5" width="374" height="561"/>
-                                        <color key="backgroundColor" name="YP White"/>
+                                        <color key="backgroundColor" name="YP Black"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hMQ-e4-d9s" secondAttribute="height" multiplier="2:3" id="5Jg-s5-pG0"/>
                                         </constraints>
@@ -98,18 +98,26 @@
                                     <constraint firstItem="VUh-rp-JYn" firstAttribute="centerX" secondItem="S6t-lR-Xm9" secondAttribute="centerX" id="te1-Ow-Sb4"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="UhI-l2-pwB" userLabel="Activity Indicator">
+                                <rect key="frame" x="185" y="440" width="44" height="44"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
+                            <constraint firstItem="UhI-l2-pwB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="185" id="8pH-LB-dZJ"/>
+                            <constraint firstItem="UhI-l2-pwB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="344" id="S2j-8i-6HR"/>
                             <constraint firstItem="S6t-lR-Xm9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="bXQ-hV-0Ad"/>
                             <constraint firstItem="S6t-lR-Xm9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="beP-9m-s4a"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UhI-l2-pwB" secondAttribute="bottom" constant="344" id="eoN-TX-Jwx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="S6t-lR-Xm9" secondAttribute="bottom" id="g4M-8E-rnU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S6t-lR-Xm9" secondAttribute="trailing" constant="20" id="gn0-e4-2jE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mun-qj-yUS" secondAttribute="trailing" constant="20" id="lKg-Qc-mM0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UhI-l2-pwB" secondAttribute="trailing" constant="185" id="pGa-oK-xLa"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="UhI-l2-pwB" id="dZ8-Uz-2F8"/>
                         <outlet property="counterLabel" destination="ymz-v7-iil" id="CQU-qs-D9Q"/>
                         <outlet property="imageView" destination="hMQ-e4-d9s" id="y3Q-mB-oFu"/>
                         <outlet property="noButton" destination="dKf-eg-Epi" id="xe3-bU-cRH"/>
@@ -124,7 +132,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Default" width="335" height="502"/>
+        <image name="none" width="128" height="128"/>
         <namedColor name="YP Black">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
