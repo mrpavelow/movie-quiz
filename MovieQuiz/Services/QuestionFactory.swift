@@ -4,6 +4,8 @@ final class QuestionFactory: QuestionFactoryProtocol {
     
     private let moviesLoader: MoviesLoading
     private weak var delegate: QuestionFactoryDelegate?
+    private var questionFactory: QuestionFactoryProtocol?
+    private var movies: [MostPopularMovie] = []
 
     init(moviesLoader: MoviesLoading, delegate: QuestionFactoryDelegate?) {
         self.moviesLoader = moviesLoader
@@ -29,10 +31,6 @@ final class QuestionFactory: QuestionFactoryProtocol {
         }
     }  
     
-    private var questionFactory: QuestionFactoryProtocol?
-
-    private var movies: [MostPopularMovie] = []
-
     func requestNextQuestion() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
@@ -65,5 +63,3 @@ final class QuestionFactory: QuestionFactoryProtocol {
     } 
     
 }
-
-

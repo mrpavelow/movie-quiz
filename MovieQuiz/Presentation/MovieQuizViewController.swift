@@ -3,10 +3,8 @@ import UIKit
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureUI()
-        
-        alertPresenter = AlertPresenter(viewController: self)
+            configureUI()
+            alertPresenter = AlertPresenter(viewController: self)
             questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
             let statisticService = StatisticService()
             showLoadingIndicator()
@@ -42,17 +40,17 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     func didLoadDataFromServer() {
-        activityIndicator.isHidden = true // скрываем индикатор загрузки
+        activityIndicator.isHidden = true
         questionFactory?.requestNextQuestion()
     }
 
     func didFailToLoadData(with error: Error) {
-        showNetworkError(message: error.localizedDescription) // возьмём в качестве сообщения описание ошибки
+        showNetworkError(message: error.localizedDescription)
     }
     
     private func showLoadingIndicator() {
-        activityIndicator.isHidden = false // говорим, что индикатор загрузки не скрыт
-        activityIndicator.startAnimating() // включаем анимацию
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
     }
     
     private func hideLoadingIndicator() {
@@ -65,7 +63,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         let model = AlertModel(title: "Ошибка",
                                message: message,
                                buttonText: "Попробовать еще раз") { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
 
             self.currentQuestionIndex = 0
             self.correctAnswers = 0
