@@ -12,8 +12,6 @@ final class MovieQuizUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         
-        // это специальная настройка для тестов: если один тест не прошёл,
-        // то следующие тесты запускаться не будут; и правда, зачем ждать?
         continueAfterFailure = false
     }
 
@@ -40,7 +38,7 @@ final class MovieQuizUITests: XCTestCase {
     }
     
     func testNoButton() {
-        sleep(3)
+        sleep(5)
         
         let firstPoster = app.images["Poster"]
         let firstPosterData = firstPoster.screenshot().pngRepresentation
@@ -63,8 +61,7 @@ final class MovieQuizUITests: XCTestCase {
             app.buttons["No"].tap()
             sleep(2)
         }
-
-        let alert = app.alerts["Game results"]
+        let alert = app.alerts["Этот раунд окончен!"]
         
         XCTAssertTrue(alert.exists)
         XCTAssertTrue(alert.label == "Этот раунд окончен!")
@@ -78,7 +75,7 @@ final class MovieQuizUITests: XCTestCase {
             sleep(2)
         }
         
-        let alert = app.alerts["Game results"]
+        let alert = app.alerts["Этот раунд окончен!"]
         alert.buttons.firstMatch.tap()
         
         sleep(2)
