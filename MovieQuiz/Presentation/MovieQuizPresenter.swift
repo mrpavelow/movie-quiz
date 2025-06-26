@@ -3,15 +3,6 @@ import UIKit
 
 final class MovieQuizPresenter: QuestionFactoryDelegate {
     
-    init(viewController: MovieQuizViewControllerProtocol) {
-        self.viewController = viewController
-        statisticService = StatisticService()
-
-        questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
-        questionFactory?.loadData()
-        viewController.showLoadingIndicator()
-    }
-    
     private let statisticService: StatisticServiceProtocol!
     private let questionsAmount: Int = 10
     private var currentQuestionIndex = 0
@@ -20,6 +11,14 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     private var questionFactory: QuestionFactoryProtocol?
     weak var viewController: (MovieQuizViewControllerProtocol)?
    
+    init(viewController: MovieQuizViewControllerProtocol) {
+        self.viewController = viewController
+        statisticService = StatisticService()
+
+        questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
+        questionFactory?.loadData()
+        viewController.showLoadingIndicator()
+    }
 
     func makeResultsMessage() -> String {
         statisticService.store(correct: correctAnswers, total: questionsAmount)
@@ -67,10 +66,6 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
     }
     
-    func isLastQuestion() -> Bool {
-        currentQuestionIndex == questionsAmount - 1
-    }
-    
     func switchToNextQuestion() {
         currentQuestionIndex += 1
     }
@@ -84,7 +79,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     }
     
     private func proceedToNextQuestionOrResults() {
-        if self.isLastQuestion() {
+        if currentQuestionIndex == questionsAmount - 1 {
 
             statisticService.store(correct: correctAnswers, total: self.questionsAmount)
             let best = statisticService.bestGame
